@@ -9,12 +9,19 @@ import app.models.user
 import app.models.jump
 import app.models.mark
 
+from app.db.session import Base
+from app.models import User, AthleteProfile, CoachProfile, Jump, Mark
+
+
 
 # Carrega .env
 load_dotenv()
 
 # Config do Alembic
 config = context.config
+target_metadata = Base.metadata
+
+
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
