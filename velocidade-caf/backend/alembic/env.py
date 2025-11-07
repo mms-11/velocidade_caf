@@ -5,6 +5,10 @@ from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from dotenv import load_dotenv
+import app.models.user
+import app.models.jump
+import app.models.mark
+
 
 # Carrega .env
 load_dotenv()

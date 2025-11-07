@@ -7,8 +7,11 @@ import sqlalchemy as sa
 from sqlalchemy import String, Text, Boolean, Integer, Float, Date, DateTime, CheckConstraint, Index, ForeignKey, text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+import app.models.user
+import app.models.jump 
+import app.models.mark
 
-from app.db.session import Base  # <<< Base do seu projeto
+from app.db.session import Base  
 
 
 
