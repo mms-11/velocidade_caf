@@ -43,8 +43,8 @@ class Jump(Base):
     notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True, comment="Observações do treino")
 
     # Timestamps
-    created_at: Mapped[sa.DateTime] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), nullable=False)
-    updated_at: Mapped[Optional[sa.DateTime]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now())
+    #created_at: Mapped[sa.DateTime] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), nullable=False)
+    #updated_at: Mapped[Optional[sa.DateTime]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now())
 
     # Relationship com User (User.jumps)
     athlete: Mapped["User"] = relationship(

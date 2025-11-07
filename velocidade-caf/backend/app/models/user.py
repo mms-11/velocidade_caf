@@ -139,8 +139,8 @@ class AthleteProfile(Base):
     contato_emergencia: Mapped[Optional[str]] = mapped_column(String(255))
 
     # Timestamps
-    created_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now())
-    updated_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now())
+    #created_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now())
+    #updated_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now())
 
     # Relationships
     user: Mapped["User"] = relationship(
@@ -205,8 +205,8 @@ class CoachProfile(Base):
     anos_experiencia: Mapped[Optional[int]] = mapped_column(Integer)
 
     # Timestamps
-    created_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now())
-    updated_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now())
+    #created_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now())
+    #updated_at: Mapped[Optional[date]] = mapped_column(DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now())
 
     # Relationship 1–1 com User
     user: Mapped["User"] = relationship(
