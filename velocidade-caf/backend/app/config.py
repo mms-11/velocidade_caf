@@ -1,4 +1,5 @@
 import os
+import secrets
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
@@ -6,7 +7,7 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
-   
+    """Configurações da aplicação."""
     
     # App
     PROJECT_NAME: str = "Velocidade CAF API"
@@ -16,8 +17,8 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = os.getenv("DATABASE_URL", "cockroachdb://root@localhost:26257/caf?sslmode=disable")
     
-    # Security
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
+    # Security - IMPORTANTE: Mude em produção!
+    SECRET_KEY: str = os.getenv("SECRET_KEY", secrets.token_urlsafe(32))
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 dias
     
