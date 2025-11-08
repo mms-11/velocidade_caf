@@ -4,7 +4,7 @@ from app.database import get_db
 from app.models.user import User
 from app.schemas.user import UserCreate
 
-def get_current_user(db: Session = Depends(get_db), user_id: int):
+def get_current_user(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     if user is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
