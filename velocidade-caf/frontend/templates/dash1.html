@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atleta Estatísticas</title>
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="icon" href="/static/img/CAF-sf.png" type="image/png">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+</head>
+<body>
+  <!-- Botão de Logout -->
+  <a id="logoutBtn" href="#" class="logout-btn" style="position:fixed;top:12px;right:12px;z-index:999;">
+    <img src="/static/img/logout.svg" alt="logout" style="width:28px;height:28px;">
+  </a>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-header">
+      <img src="/static/img/CAF-sf.png" alt="Logo">
+      <h1>Velocidade C.A.F</h1>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <button id="sidebar-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <ul>
+        <li>
+          <a href="/atleta-dash.html">
+            <img src="/static/img/home.svg" alt="Home">
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash2.html">
+            <img src="/static/img/user.svg" alt="Perfil">
+            <span>Perfil</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash3.html">
+            <img src="/static/img/data.svg" alt="Marcas">
+            <span>Marcas</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="/atleta-dash1.html">
+            <img src="/static/img/stats.svg" alt="Estatísticas">
+            <span>Estatísticas</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="logoutNow(); return false;">
+            <img src="/static/img/logout.svg" alt="Sair">
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="content">
+    <h2>Estatísticas dos Atletas</h2>
+    <p>Acompanhe a evolução nos saltos e nas provas de velocidade.</p>
+
+    <!-- Gráfico de saltos -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Evolução nos Saltos</h3>
+          <select id="saltosPeriodo">
+            <option value="trimestral">Trimestral</option>
+            <option value="semestral">Semestral</option>
+            <option value="anual">Anual</option>
+            <option value="todas">Todas</option>
+          </select>
+        </div>
+        <canvas id="saltosChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Gráfico de provas -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Evolução nas Provas de Velocidade</h3>
+          <div class="filters">
+            <select id="provasPeriodo">
+              <option value="trimestral">Trimestral</option>
+              <option value="semestral">Semestral</option>
+              <option value="anual">Anual</option>
+              <option value="todas">Todas</option>
+            </select>
+
+            <select id="provasFiltro">
+              <option value="todas">Todas as provas</option>
+              <option value="100m">100m</option>
+              <option value="200m">200m</option>
+              <option value="400m">400m</option>
+            </select>
+          </div>
+        </div>
+        <canvas id="provasChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Relatórios de Marcas -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Melhores Marcas (por Prova)</h3>
+        </div>
+        <div id="best-marks" class="preview-grid">
+          <p class="muted">Nenhuma marca registrada ainda.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Melhores do Ano Corrente</h3>
+        </div>
+        <div id="current-year-best" class="preview-grid">
+          <p class="muted">Nenhuma marca registrada este ano.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Ventos não válidos (acima de +2.0)</h3>
+        </div>
+        <div id="invalid-wind-marks" class="preview-grid">
+          <p class="muted">Nenhuma marca com vento irregular.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/dashboard.js"></script>
+  <script src="/static/js/pwa-register.js"></script>
+</body>
+</html>

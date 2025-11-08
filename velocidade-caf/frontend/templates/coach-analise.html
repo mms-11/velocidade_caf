@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velocidade C.A.F • Análises</title>
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo-header">
+      <img src="../assets/img/CAF.png" alt="Logo CAF" />
+      <h1>Velocidade C.A.F • Treinador</h1>
+    </div>
+    <button id="sidebar-toggle">☰</button>
+  </header>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar expanded">
+    <nav>
+      <ul>
+        <li onclick="window.location.href='treinador-dash.html'">
+          <img src="../assets/img/home.svg" alt="Home" />
+          <span>Início</span>
+        </li>
+        <li onclick="window.location.href='treinador-testes.html'">
+          <img src="../assets/img/user.svg" alt="Atletas" />
+          <span>Atletas</span>
+        </li>
+        <li onclick="window.location.href='treinador-testes.html'">
+          <img src="../assets/img/test.svg" alt="Testes" />
+          <span>Testes</span>
+        </li>
+        <li class="active">
+          <img src="../assets/img/stats.svg" alt="Análises" />
+          <span>Análises</span>
+        </li>
+        <li onclick="window.location.href='treinador-config.html'">
+          <img src="../assets/img/settings.svg" alt="Configurações" />
+          <span>Configurações</span>
+        </li>
+        <li onclick="logoutUser()">
+          <img src="../assets/img/logout.svg" alt="Sair" />
+          <span>Sair</span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="content">
+    <h2 class="page-title">Análises de Desempenho</h2>
+
+    <!-- FILTROS -->
+    <section class="card-dashboard filters">
+      <div class="filter-group">
+        <label>Atleta</label>
+        <select id="athleteSelect"></select>
+      </div>
+      <div class="filter-group">
+        <label>Tipo</label>
+        <select id="tipoSelect">
+          <option value="competicao">Competições</option>
+          <option value="teste">Testes</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Período</label>
+        <select id="periodSelect">
+          <option value="30">Últimos 30 dias</option>
+          <option value="90">Últimos 90 dias</option>
+          <option value="365">Último ano</option>
+          <option value="0">Todos</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Gráfico</label>
+        <select id="chartTypeSelect">
+          <option value="line_point">Linhas e pontos</option>
+          <option value="line">Linhas</option>
+          <option value="bar">Barras</option>
+          <option value="scatter">Dispersão</option>
+          <option value="radar">Radar</option>
+        </select>
+      </div>
+      <button id="refreshBtn" class="btn btn-primary">Atualizar</button>
+    </section>
+
+    <!-- GRÁFICOS -->
+    <section class="grid">
+      <div class="card-dashboard">
+        <h3>Evolução da Performance</h3>
+        <canvas id="evolucaoChart" height="100"></canvas>
+      </div>
+
+      <div class="card-dashboard">
+        <h3>Melhores Resultados</h3>
+        <canvas id="melhoresChart" height="100"></canvas>
+      </div>
+    </section>
+
+    <!-- HEATMAP -->
+    <section class="card-dashboard full">
+      <h3>Matriz de Correlação</h3>
+      <div id="correlationContainer" style="overflow-x:auto; text-align:center;">
+        <canvas id="heatmapCanvas" height="300"></canvas>
+      </div>
+    </section>
+
+    <!-- TABELA -->
+    <section class="card-dashboard full">
+      <h3>Resultados Brutos</h3>
+      <table id="rawTable">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Evento</th>
+            <th>Resultado</th>
+            <th>Vento</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/treinador-analise.js"></script>
+  <script>
+    function logoutUser() {
+      fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
+        .then(() => (window.location.href = 'index.html'))
+        .catch(console.error);
+    }
+  </script>
+</body>
+</html>

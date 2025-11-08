@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de Gestão de Atletas - C.A.F Atletismo">
+  <meta name="theme-color" content="#06b6d4">
+  <title>Velocidade C.A.F • Login</title>
+  
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="icon" href="/static/img/CAF-sf.png" type="image/png">
+  
+  <!-- Preload recursos críticos -->
+  <link rel="preload" href="/static/css/style.css" as="style">
+  <link rel="preload" href="/static/js/auth.js" as="script">
+</head>
+<body>
+  <div class="wrap">
+    <div class="card-login-modern">
+      <img src="/static/img/CAF-sf.png" alt="Logo CAF Atletismo" class="logo">
+      
+      <h1>Velocidade C.A.F • Login</h1>
+      <p class="lead">Acesse para registrar e visualizar seus dados de treino.</p>
+
+      <form id="loginForm">
+        <label for="email">E-mail</label>
+        <input 
+          type="text" 
+          id="email" 
+          autocomplete="email" 
+          placeholder="seu@email.com"
+          required
+        >
+        
+        <label for="password">Senha</label>
+        <input 
+          type="password" 
+          id="password" 
+          autocomplete="current-password"
+          placeholder="••••••••" 
+          required
+          minlength="6"
+        >
+        
+        <div class="row">
+          <label class="small muted">
+            <input type="checkbox" id="remember"> 
+            Lembrar de mim
+          </label>
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+        
+        <div class="small muted" style="text-align: center; margin-top: 12px;">
+          Não tem conta? <a href="/register.html">Criar conta</a>
+        </div>
+      </form>
+      
+      <!-- Google Sign-In (opcional) -->
+      <div class="google-signin-container" style="display: none;">
+        <div id="g_id_onload"
+          data-client_id="YOUR_GOOGLE_CLIENT_ID"
+          data-login_uri=""
+          data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="outline"
+          data-text="signin_with"
+          data-shape="rectangular"
+          data-logo_alignment="left">
+        </div>
+      </div>
+
+      <div id="feedback" class="small muted" style="text-align: center; margin-top: 12px;"></div>
+    </div>
+  </div>
+  
+  <!-- Indicador offline -->
+  <div id="offlineIndicator"></div>
+  
+  <!-- Scripts -->
+  <script src="/static/js/pwa-register.js"></script>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Atleta</title>
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="icon" href="/static/img/CAF-sf.png" type="image/png">
+</head>
+<body>
+  <!-- Botão de Logout -->
+  <a id="logoutBtn" href="#" class="logout-btn" style="position:fixed;top:12px;right:12px;z-index:999;">
+    <img src="/static/img/logout.svg" alt="logout" style="width:28px;height:28px;">
+  </a>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-header">
+      <img src="/static/img/CAF-sf.png" alt="Logo">
+      <h1>Velocidade C.A.F</h1>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <button id="sidebar-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <ul>
+        <li>
+          <a href="/atleta-dash.html">
+            <img src="/static/img/home.svg" alt="Home">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="/atleta-dash2.html">
+            <img src="/static/img/user.svg" alt="Perfil">
+            <span>Perfil</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash3.html">
+            <img src="/static/img/data.svg" alt="Marcas">
+            <span>Marcas</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash1.html">
+            <img src="/static/img/stats.svg" alt="Estatísticas">
+            <span>Estatísticas</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="logoutNow(); return false;">
+            <img src="/static/img/logout.svg" alt="Sair">
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo -->
+  <main class="content">
+    <section class="profile-section">
+      <h2>Informações Pessoais</h2>
+      <form id="athlete-form" class="profile-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" placeholder="Digite seu nome completo">
+          </div>
+
+          <div class="form-group">
+            <label for="dataNascimento">Data de Nascimento</label>
+            <input type="date" id="dataNascimento">
+          </div>
+
+          <div class="form-group">
+            <label for="altura">Altura (cm)</label>
+            <input type="number" id="altura" placeholder="Ex: 180" min="100" max="250">
+          </div>
+
+          <div class="form-group">
+            <label for="peso">Peso Atual (kg)</label>
+            <input type="number" id="peso" placeholder="Ex: 75" step="0.1" min="30" max="200">
+          </div>
+
+          <div class="form-group">
+            <label for="tamanhoPe">Tamanho do Pé</label>
+            <input type="number" id="tamanhoPe" placeholder="Ex: 42" min="25" max="55">
+          </div>
+
+          <div class="form-group">
+            <label for="endereco">Endereço</label>
+            <input type="text" id="endereco" placeholder="Rua, número, bairro">
+          </div>
+
+          <div class="form-group">
+            <label for="provaPrincipal">Prova Principal</label>
+            <select id="provaPrincipal">
+              <option value="">Selecione...</option>
+              <option value="100m">100m</option>
+              <option value="200m">200m</option>
+              <option value="400m">400m</option>
+              <option value="800m">800m</option>
+              <option value="1500m">1500m</option>
+              <option value="110m_barreiras">110m com barreiras</option>
+              <option value="100m_barreiras">100m com barreiras</option>
+              <option value="400m_barreiras">400m com barreiras</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="provaSecundaria">Prova Secundária</label>
+            <select id="provaSecundaria">
+              <option value="">Selecione...</option>
+              <option value="100m">100m</option>
+              <option value="200m">200m</option>
+              <option value="400m">400m</option>
+              <option value="800m">800m</option>
+              <option value="1500m">1500m</option>
+              <option value="110m_barreiras">110m com barreiras</option>
+              <option value="100m_barreiras">100m com barreiras</option>
+              <option value="400m_barreiras">400m com barreiras</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="save-btn">Salvar Informações</button>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top: 15px; padding: 10px; border-radius: 4px; display: none;"></div>
+
+      <!-- Pré-visualização dos dados salvos -->
+      <div class="preview-card" id="profile-preview" aria-live="polite">
+        <h3 style="margin-bottom:12px;">Pré-visualização do Perfil</h3>
+        <div class="preview-grid">
+          <div class="preview-item"><h4>Nome Completo</h4><p id="pv-nome">—</p></div>
+          <div class="preview-item"><h4>Data de Nascimento</h4><p id="pv-dataNascimento">—</p></div>
+          <div class="preview-item"><h4>Idade</h4><p id="pv-idade">—</p></div>
+          <div class="preview-item"><h4>Altura (cm)</h4><p id="pv-altura">—</p></div>
+          <div class="preview-item"><h4>Peso (kg)</h4><p id="pv-peso">—</p></div>
+          <div class="preview-item"><h4>Tamanho do Pé</h4><p id="pv-tamanhoPe">—</p></div>
+          <div class="preview-item"><h4>Endereço</h4><p id="pv-endereco">—</p></div>
+          <div class="preview-item"><h4>Prova Principal</h4><p id="pv-provaPrincipal">—</p></div>
+          <div class="preview-item"><h4>Prova Secundária</h4><p id="pv-provaSecundaria">—</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/dashboard.js"></script>
+  <script src="/static/js/atleta-perfil.js"></script>
+  <script src="/static/js/pwa-register.js"></script>
+</body>
+</html>
