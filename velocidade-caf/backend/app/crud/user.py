@@ -1,21 +1,19 @@
 from typing import Optional
 from sqlalchemy.orm import Session
-from passlib.context import CryptContext
+import bcrypt
 
 from app.models.user import User
 from app.schemas import UserCreate, UserUpdate
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 def get_password_hash(password: str) -> str:
     """Gera hash da senha."""
-    return pwd_context.hash(password)
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verifica senha."""
-    return pwd_context.verify(plain_password, hashed_password)
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 
 def get_user_by_id(db: Session, user_id: str) -> Optional[User]:
