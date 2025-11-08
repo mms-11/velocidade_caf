@@ -35,7 +35,7 @@ def login(user_in: UserLogin, db: Session = Depends(get_db)):
     
     # TODO: Gerar JWT token
     return {
-        "access_token": "fake-token",
+        "access_token": "fake-token-change-later",
         "token_type": "bearer",
         "user": user
     }
