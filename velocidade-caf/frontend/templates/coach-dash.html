@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treinador - Painel</title>
+<link rel="stylesheet" href="/static/css/dashboard.css">
+<script src="/static/js/dashboard.js" defer></script>
+<link rel="manifest" href="/static/manifest.json">
+</head>
+<body>
+<a id="logoutBtn" href="#" class="logout-btn" style="position:fixed;top:12px;right:12px;z-index:999;"><img src="/static/img/logout.svg" alt="logout" style="width:28px;height:28px;"></a>>
+  <!-- Header -->
+  <header>
+    <div class="logo-header">
+      <img src="..//static/img/CAF-sf.png" alt="Logo">
+      <h1>Velocidade C.A.F • Treinador</h1>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <button id="sidebar-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <ul>
+        <li class="active"><img src="../static/img/home.svg" alt="Home"> <span>Home</span></li>
+        <li><img src="../static/img/test.svg" alt="Atletas"> <span>Atletas</span></li>
+        <li><img src="../static/img/stats.svg" alt="Estatísticas"> <span>Estatísticas</span></li>
+        <li><img src="../static/img/settings.svg" alt="Configurações"> <span>Configurações</span></li>
+        <li><img src="../static/img/logout.svg" alt="Sair"> <span>Sair</span></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="content">
+    <h2>Painel do Treinador</h2>
+    <p>Gerencie solicitações de cadastro e acesse os atletas do grupo.</p>
+
+    <!-- Toast de solicitações pendentes -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Solicitações de Cadastro</h3>
+        </div>
+        <div id="coach-toast" class="toast-list" aria-live="polite"></div>
+        <div id="coach-toast-empty" class="muted" style="margin-top:8px; display:none;">Sem solicitações pendentes.</div>
+      </div>
+    </section>
+
+    <!-- Lista de atletas aceitos -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Atletas do Grupo</h3>
+        </div>
+        <div id="accepted-athletes-list" class="athletes-list"></div>
+        <div id="accepted-empty" class="muted" style="margin-top:8px; display:none;">Nenhum atleta aceito ainda.</div>
+      </div>
+    </section>
+  </main>
+<script src="/static/js/pwa-register.js"></script>
+</body>
+</html>
+
+

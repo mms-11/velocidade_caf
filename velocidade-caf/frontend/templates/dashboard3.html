@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcas do Atleta</title>
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="icon" href="/static/img/CAF-sf.png" type="image/png">
+  <style>
+    .delete-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .delete-btn:hover { background: #dc2626; }
+    
+    .mark-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 14px;
+      position: relative;
+    }
+    
+    .mark-card.invalid-wind {
+      border-left: 4px solid #ef4444;
+      background: #fff5f5;
+    }
+    
+    .mark-card h4 {
+      margin: 0 0 8px 0;
+      color: #0f172a;
+      font-size: 16px;
+    }
+    
+    .mark-card p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #64748b;
+    }
+    
+    .mark-card .mark-date {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    
+    .mark-card .mark-result {
+      font-size: 24px;
+      font-weight: bold;
+      color: #06b6d4;
+      margin: 12px 0;
+    }
+    
+    .wind-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .wind-valid {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    
+    .wind-invalid {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+  </style>
+</head>
+<body>
+  <!-- Botão de Logout -->
+  <a id="logoutBtn" href="#" class="logout-btn" style="position:fixed;top:12px;right:12px;z-index:999;">
+    <img src="/static/img/logout.svg" alt="logout" style="width:28px;height:28px;">
+  </a>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-header">
+      <img src="/static/img/CAF-sf.png" alt="Logo">
+      <h1>Velocidade C.A.F</h1>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <button id="sidebar-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <ul>
+        <li>
+          <a href="/atleta-dash.html">
+            <img src="/static/img/home.svg" alt="Home">
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash2.html">
+            <img src="/static/img/user.svg" alt="Perfil">
+            <span>Perfil</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="/atleta-dash3.html">
+            <img src="/static/img/data.svg" alt="Marcas">
+            <span>Marcas</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash1.html">
+            <img src="/static/img/stats.svg" alt="Estatísticas">
+            <span>Estatísticas</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="logoutNow(); return false;">
+            <img src="/static/img/logout.svg" alt="Sair">
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo -->
+  <main class="content">
+    <section class="profile-section">
+      <h2>Adicionar Marcas</h2>
+      <form id="marca-form" class="profile-form">
+        <input type="hidden" id="markId" value="">
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="prova">Prova</label>
+            <select id="prova" required>
+              <option value="">Selecione...</option>
+              <option value="100m">100m rasos</option>
+              <option value="200m">200m rasos</option>
+              <option value="400m">400m rasos</option>
+              <option value="800m">800m</option>
+              <option value="1500m">1500m</option>
+              <option value="110m_barreiras">110m com barreiras</option>
+              <option value="100m_barreiras">100m com barreiras</option>
+              <option value="400m_barreiras">400m com barreiras</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="marca">Marca (segundos)</label>
+            <input type="number" id="marca" placeholder="Ex: 10.72" step="0.01" required>
+          </div>
+
+          <div class="form-group">
+            <label for="vento">Vento (m/s)</label>
+            <input type="number" id="vento" placeholder="Ex: +2.0" step="0.1" required>
+            <small style="color: #64748b;">Máximo permitido: +2.0 m/s</small>
+          </div>
+
+          <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" id="data" required>
+          </div>
+
+          <div class="form-group">
+            <label for="local">Local</label>
+            <input type="text" id="local" placeholder="Ex: Recife/PE" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" required>
+              <option value="competicao">Competição</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="save-btn" id="submitBtn">Adicionar Marca</button>
+          <button type="button" class="btn" id="cancelBtn" onclick="resetForm()" style="display: none; background: #6c757d; color: white; margin-left: 10px;">Cancelar</button>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top: 15px; padding: 10px; border-radius: 4px; display: none;"></div>
+
+      <!-- Filtros -->
+      <div style="margin: 30px 0 20px 0; display: flex; gap: 15px; flex-wrap: wrap;">
+        <div>
+          <label for="filterProva" style="display: block; margin-bottom: 5px; font-weight: 600;">Filtrar por Prova:</label>
+          <select id="filterProva" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+            <option value="">Todas</option>
+            <option value="100m">100m</option>
+            <option value="200m">200m</option>
+            <option value="400m">400m</option>
+            <option value="800m">800m</option>
+            <option value="1500m">1500m</option>
+            <option value="110m_barreiras">110m com barreiras</option>
+            <option value="100m_barreiras">100m com barreiras</option>
+            <option value="400m_barreiras">400m com barreiras</option>
+              
+          </select>
+        </div>
+        
+        <div>
+          <label for="filterTipo" style="display: block; margin-bottom: 5px; font-weight: 600;">Filtrar por Tipo:</label>
+          <select id="filterTipo" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+            <option value="">Todos</option>
+            <option value="competicao">Competição</option>
+          </select>
+        </div>
+        
+        <div style="align-self: flex-end;">
+          <button onclick="loadMarks()" class="btn btn-primary">Filtrar</button>
+        </div>
+      </div>
+
+      <!-- Pré-visualização das marcas -->
+      <div class="preview-card" id="marcas-preview" aria-live="polite">
+        <h3 style="margin-bottom:12px;">Marcas Registradas</h3>
+        <div id="marcas-list" class="preview-grid">
+          <p class="muted">Carregando marcas...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/dashboard.js"></script>
+  <script src="/static/js/atleta-marcas.js"></script>
+  <script src="/static/js/pwa-register.js"></script>
+</body>
+</html>

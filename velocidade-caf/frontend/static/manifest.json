@@ -1,0 +1,17 @@
+{
+  "name": "Velocidade C.A.F",
+  "short_name": "CAF",
+  "description": "Sistema de Gestão de Atletas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/static/img/CAF-sf.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

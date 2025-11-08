@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treinador - Testes</title>
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <script src="/static/js/dashboard.js" defer></script>
+<link rel="manifest" href="/static/manifest.json">
+</head>
+<body>
+<a id="logoutBtn" href="#" class="logout-btn" style="position:fixed;top:12px;right:12px;z-index:999;"><img src="/static/img/logout.svg" alt="logout" style="width:28px;height:28px;"></a>>
+  <!-- Header -->
+  <header>
+    <div class="logo-header">
+      <img src="..//static/img/CAF-sf.png" alt="Logo">
+      <h1>Velocidade C.A.F • Testes</h1>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <button id="sidebar-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <ul>
+        <li><img src="../static/img/home.svg" alt="Home"> <span>Home</span></li>
+        <li class="active"><img src="../static/img/test.svg" alt="Atletas"> <span>Atletas</span></li>
+        <li><img src="../static/img/stats.svg" alt="Estatísticas"> <span>Estatísticas</span></li>
+        <li><img src="../static/img/settings.svg" alt="Configurações"> <span>Configurações</span></li>
+        <li><img src="../static/img/logout.svg" alt="Sair"> <span>Sair</span></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="content">
+    <h2>Criar Teste</h2>
+    <p>Cadastre testes como 100m, com tempo total, parciais opcionais e data.</p>
+
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header"><h3>Novo Teste de Corrida</h3></div>
+        <form id="coach-test-form" class="profile-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="testeAtleta">Atleta</label>
+              <select id="testeAtleta" required></select>
+            </div>
+            <div class="form-group">
+              <label for="testeProva">Prova</label>
+              <input type="text" id="testeProva" placeholder="Ex: 100m" required>
+            </div>
+            <div class="form-group">
+              <label for="testeTempoTotal">Tempo Total (s)</label>
+              <input type="number" id="testeTempoTotal" placeholder="Ex: 10.72" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="testeData">Data</label>
+              <input type="date" id="testeData" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:12px;">
+            <label>Parciais (opcional)</label>
+            <div id="splits-container" class="preview-grid"></div>
+            <button type="button" id="add-split" class="btn btn-primary" style="margin-top:8px; width:max-content;">Adicionar Parcial</button>
+            <div class="muted">Cada parcial contém metragem (m) e tempo (s).</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="save-btn">Salvar Teste</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header"><h3>Novo Teste de Saltos</h3></div>
+        <form id="coach-jump-form" class="profile-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="saltoAtleta">Atleta</label>
+              <select id="saltoAtleta" required></select>
+            </div>
+            <div class="form-group">
+              <label for="saltoNome">Nome do Teste</label>
+              <input type="text" id="saltoNome" placeholder="Ex: 5 saltos alongados" required>
+            </div>
+            <div class="form-group">
+              <label for="saltoDistTotal">Distância Total (m)</label>
+              <input type="number" id="saltoDistTotal" placeholder="Ex: 15.40" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="saltoData">Data</label>
+              <input type="date" id="saltoData" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:12px;">
+            <label>Parciais (opcional)</label>
+            <div id="salto-splits-container" class="preview-grid"></div>
+            <button type="button" id="add-salto-split" class="btn btn-primary" style="margin-top:8px; width:max-content;">Adicionar Parcial (m)</button>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="save-btn">Salvar Teste de Saltos</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header"><h3>Testes Cadastrados</h3></div>
+        <div id="coach-tests-list" class="preview-grid"></div>
+        <div id="coach-tests-empty" class="muted" style="margin-top:8px; display:none;">Nenhum teste cadastrado.</div>
+      </div>
+    </section>
+  </main>
+<script src="/static/js/pwa-register.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações • Treinador</title>
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <script src="/static/js/configuracoes.js" defer></script>
+<link rel="manifest" href="/static/manifest.json">
+</head>
+
+<body>
+<a id="logoutBtn" href="#" class="logout-btn" style="position:fixed;top:12px;right:12px;z-index:999;"><img src="/static/img/logout.svg" alt="logout" style="width:28px;height:28px;"></a>>
+  <!-- Header -->
+  <header>
+    <div class="logo-header">
+      <img src="..//static/img/CAF-sf.png" alt="Logo">
+      <h1>Velocidade C.A.F • Configurações</h1>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <button id="sidebar-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <ul>
+        <li><img src="../static/img/home.svg" alt="Home"> <span>Home</span></li>
+        <li><img src="../static/img/test.svg" alt="Atletas"> <span>Atletas</span></li>
+        <li><img src="../static/img/stats.svg" alt="Estatísticas"> <span>Estatísticas</span></li>
+        <li class="active"><img src="../static/img/settings.svg" alt="Configurações"> <span>Configurações</span></li>
+        <li><img src="../static/img/logout.svg" alt="Sair"> <span>Sair</span></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="content">
+    <h2>Painel de Configurações</h2>
+    <p>Gerencie testes, atletas e convites diretamente pelo painel.</p>
+
+    <!-- Seção: Filtragem de Testes -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Gerenciar Testes</h3>
+        </div>
+
+        <div class="filters">
+          <label for="filter-athlete">Filtrar por atleta:</label>
+          <select id="filter-athlete">
+            <option value="">Todos os atletas</option>
+          </select>
+
+          <label for="filter-date">Filtrar por data:</label>
+          <input type="date" id="filter-date">
+
+          <label for="filter-type">Filtrar por tipo de teste:</label>
+          <select id="filter-type">
+            <option value="">Todos os testes</option>
+          </select>
+
+          <button id="filter-apply" class="btn-primary">Filtrar</button>
+        </div>
+
+        <div id="tests-list" class="tests-list">
+          <p class="muted">Nenhum teste encontrado. Selecione filtros acima.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção: Edição e Exclusão de Atletas -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Gerenciar Atletas</h3>
+        </div>
+
+        <div id="athletes-management" class="athletes-list">
+          <p class="muted">Nenhum atleta cadastrado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção: Convite por e-mail -->
+    <section class="stats-section">
+      <div class="card">
+        <div class="stats-header">
+          <h3>Convidar Atleta por E-mail</h3>
+        </div>
+
+        <form id="invite-form" class="invite-form">
+          <input type="email" id="invite-email" placeholder="Digite o e-mail do atleta" required>
+          <button type="submit" class="btn-primary">Enviar Convite</button>
+        </form>
+        <div id="invite-feedback" class="muted"></div>
+      </div>
+    </section>
+  </main>
+<script src="/static/js/pwa-register.js"></script>
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>

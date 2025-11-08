@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atleta Dashboard</title>
+<link rel="stylesheet" href="/static/css/dashboard.css">
+<link rel="manifest" href="/static/manifest.json">
+<link rel="icon" href="/static/img/CAF-sf.png" type="image/png">
+</head>
+<body>
+  <!-- Botão de Logout -->
+  <a id="logoutBtn" href="#" class="logout-btn" style="position:fixed;top:12px;right:12px;z-index:999;">
+    <img src="/static/img/logout.svg" alt="logout" style="width:28px;height:28px;">
+  </a>
+  
+  <!-- Header -->
+  <header>
+    <div class="logo-header">
+      <img src="/static/img/CAF-sf.png" alt="Logo">
+      <h1>Velocidade C.A.F</h1>
+    </div>
+  </header>
+  
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <button id="sidebar-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <ul>
+        <li class="active">
+          <a href="/atleta-dash.html">
+            <img src="/static/img/home.svg" alt="Home">
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash2.html">
+            <img src="/static/img/user.svg" alt="Perfil">
+            <span>Perfil</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash3.html">
+            <img src="/static/img/data.svg" alt="Marcas">
+            <span>Marcas</span>
+          </a>
+        </li>
+        <li>
+          <a href="/atleta-dash1.html">
+            <img src="/static/img/stats.svg" alt="Estatísticas">
+            <span>Estatísticas</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="logoutNow(); return false;">
+            <img src="/static/img/logout.svg" alt="Sair">
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  
+  <!-- Conteúdo principal -->
+  <main class="content">
+    <h2>Bem-vindo, <span id="athleteName">Atleta</span>!</h2>
+    <p>Registre seus dados diários, acompanhe seu desempenho e visualize suas estatísticas.</p>
+    
+    <!-- Seletor de Data -->
+    <div style="margin-bottom: 20px;">
+      <label for="selectedDate" style="font-weight: bold; margin-right: 10px;">Data:</label>
+      <input type="date" id="selectedDate" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+      <button onclick="loadDayData()" class="btn btn-primary" style="margin-left: 10px;">Carregar</button>
+    </div>
+    
+    <!-- Cards de informações rápidas -->
+    <div class="cards-saltos">
+      <div class="card-salto">
+        <h3>Salto 1</h3>
+        <p id="salto1Display">-- cm</p>
+      </div>
+      <div class="card-salto">
+        <h3>Salto 2</h3>
+        <p id="salto2Display">-- cm</p>
+      </div>
+      <div class="card-salto">
+        <h3>Salto 3</h3>
+        <p id="salto3Display">-- cm</p>
+      </div>
+      <div class="card-salto media">
+        <h3>Média do Dia</h3>
+        <p id="mediaDia">-- cm</p>
+      </div>
+    </div>
+    
+    <div class="cards-saltos vertical">
+      <div class="card-salto">
+        <h3>Maior Salto (Recorde)</h3>
+        <p id="maiorSalto">-- cm</p>
+      </div>
+      <div class="card-salto">
+        <h3>Treinos na Semana</h3>
+        <p id="treinosSemana">0/7</p>
+      </div>
+    </div>
+    
+    <!-- Formulário para registrar/editar saltos -->
+    <div class="daily-form">
+      <h3 id="formTitle">Registrar Saltos</h3>
+      <form id="dailyForm">
+        <input type="hidden" id="recordId" value="">
+        
+        <label for="alturaS1">Salto 1 (cm)</label>
+        <input type="number" id="alturaS1" placeholder="Ex: 45" required step="0.1">
+        
+        <label for="alturaS2">Salto 2 (cm)</label>
+        <input type="number" id="alturaS2" placeholder="Ex: 48" required step="0.1">
+        
+        <label for="alturaS3">Salto 3 (cm)</label>
+        <input type="number" id="alturaS3" placeholder="Ex: 50" required step="0.1">
+        
+        <label for="notes">Observações</label>
+        <textarea id="notes" placeholder="Ex: Sensação durante o treino..."></textarea>
+        
+        <div style="display: flex; gap: 10px;">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Registrar</button>
+          <button type="button" class="btn" id="cancelBtn" onclick="resetForm()" style="display: none; background: #6c757d; color: white;">Cancelar</button>
+          <button type="button" class="btn" id="deleteBtn" onclick="deleteRecord()" style="display: none; background: #dc3545; color: white;">Excluir</button>
+        </div>
+      </form>
+    </div>
+    
+    <div id="feedback" style="margin-top: 15px; padding: 10px; border-radius: 4px; display: none;"></div>
+  </main>
+  
+  <script src="/static/js/dashboard.js"></script>
+  <script src="/static/js/atleta-dashboard.js"></script>
+  <script src="/static/js/pwa-register.js"></script>
+</body>
+</html>
