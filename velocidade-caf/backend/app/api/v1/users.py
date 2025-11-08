@@ -50,23 +50,25 @@ def login(user_in: UserLogin, db: Session = Depends(get_db)):
     db.commit()
     
     # Cria token JWT
-    access_token = create_access_token(data={"sub": user.id, "email": user.email, "role": user.role})
+    access_token = create_access_token(
+        data={"sub": user.id, "email": user.email, "role": user.role}
+    )
     
-    return {
-        "access_token": access_token,
-        "token_type": "bearer",
-        "user": user
-    }
+    return Token(
+        access_token=access_token,
+        token_type="bearer",
+        user=user
+    )
 
 
-@router.post("/token", response_model=Token)
+@router.post("/token")
 def login_oauth2(
-    form_data: OAuth2PasswordRequestForm = Depends(),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    form_data: OAuth2PasswordRequestForm = Depends()
 ):
     """
-    Login compatível com OAuth2 (para Swagger UI).
-    Username = email
+    Login OAuth2 para Swagger UI.
+    Use seu email como username.
     """
     user = crud_user.authenticate_user(db, form_data.username, form_data.password)
     if not user:
@@ -88,12 +90,14 @@ def login_oauth2(
     db.commit()
     
     # Cria token JWT
-    access_token = create_access_token(data={"sub": user.id, "email": user.email, "role": user.role})
+    access_token = create_access_token(
+        data={"sub": user.id, "email": user.email, "role": user.role}
+    )
     
+    # OAuth2 só retorna access_token e token_type
     return {
         "access_token": access_token,
-        "token_type": "bearer",
-        "user": user
+        "token_type": "bearer"
     }
 
 
@@ -109,11 +113,7 @@ def get_user(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    """
-    Busca usuário por ID.
-    Usuários só podem ver seus próprios dados (exceto treinadores).
-    """
-    # Treinadores podem ver qualquer usuário
+    """Busca usuário por ID."""
     if current_user.role != "treinador" and current_user.id != user_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
