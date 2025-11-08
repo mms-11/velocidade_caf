@@ -1,19 +1,39 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.endpoints.health import router as health_router
 
-app = FastAPI()
+from app.config import settings
+from app.api.v1 import users
 
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json"
+)
+
+# CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.BACKEND_CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-app.include_router(health_router, prefix="/api/v1/health", tags=["health"])
+# Rotas
+app.include_router(users.router, prefix=f"{settings.API_V1_STR}/users", tags=["users"])
+
 
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to the FastAPI application!"}
+def root():
+    """Health check."""
+    return {
+        "message": "Velocidade CAF API",
+        "version": settings.VERSION,
+        "status": "online"
+    }
+
+
+@app.get("/health")
+def health():
+    """Health check detalhado."""
+    return {"status": "healthy"}
