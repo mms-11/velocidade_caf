@@ -51,11 +51,11 @@ function checkExistingAuth() {
   const userRole = localStorage.getItem('userRole');
   
   // Se já está autenticado e está na página de login/register, redireciona
-  if (token && (window.location.pathname === '/' || window.location.pathname === '/login.html' || window.location.pathname === '/register.html')) {
+  if (token && (window.location.pathname === '/' || window.location.pathname === '/index.html' || window.location.pathname === '/register.html')) {
     if (userRole === 'treinador') {
-      window.location.href = '/treinador-dash.html';
+      window.location.href = '/coach-dash.html';
     } else {
-      window.location.href = '/atleta-dash.html';
+      window.location.href = '/athlete-analises.html';
     }
   }
 }
@@ -116,9 +116,9 @@ function setupLoginForm() {
       
       // Redireciona baseado no role
       if (data.user.role === 'treinador') {
-        window.location.href = '/treinador-dash.html';
+        window.location.href = '/coach-dash.html';
       } else {
-        window.location.href = '/atleta-dash.html';
+        window.location.href = '/athlete-analises.html';
       }
     } catch (error) {
       showFeedback('feedback', 'Erro de conexão. Tente novamente.', true);
@@ -187,7 +187,7 @@ function setupRegisterForm() {
       // Sucesso
       showFeedback('feedback', 'Conta criada! Faça login para continuar...', false);
       setTimeout(() => {
-        window.location.href = '/login.html';
+        window.location.href = '/';
       }, 1500);
     } catch (error) {
       showFeedback('feedback', 'Erro de conexão. Tente novamente.', true);
@@ -204,7 +204,7 @@ window.logoutNow = function() {
   localStorage.removeItem('userRole');
   localStorage.removeItem('userId');
   localStorage.removeItem('userEmail');
-  window.location.href = '/login.html';
+  window.location.href = '/';
 };
 
 console.log('[Auth] Módulo de autenticação carregado');
