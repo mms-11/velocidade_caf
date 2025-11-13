@@ -11,12 +11,12 @@ function checkAuth() {
   const userRole = localStorage.getItem('userRole');
   
   if (!authToken) {
-    window.location.href = '/login.html';
+    window.location.href = '/';
     return false;
   }
   
   if (userRole !== 'treinador') {
-    window.location.href = '/atleta-dash.html';
+    window.location.href = '/athlete-analises.html';
     return false;
   }
   
@@ -194,7 +194,7 @@ async function displayAthletes(athletes) {
 
 /* === VER DETALHES DO ATLETA === */
 function viewAthleteDetails(athleteId) {
-  window.location.href = `/treinador-analise.html?athlete=${athleteId}`;
+  window.location.href = `/coach-analise.html?athlete=${athleteId}`;
 }
 
 /* === FORMATAR DATA === */
@@ -206,7 +206,7 @@ function formatDate(dateStr) {
 /* === LOGOUT === */
 function logoutNow() {
   localStorage.clear();
-  window.location.href = '/login.html';
+  window.location.href = '/';
 }
 
 function setupLogout() {

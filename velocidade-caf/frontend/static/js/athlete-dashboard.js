@@ -9,7 +9,7 @@ let authToken = localStorage.getItem('authToken');
 /* === VERIFICAR AUTENTICAÇÃO === */
 function checkAuth() {
   if (!authToken) {
-    window.location.href = '/login.html';
+    window.location.href = '/';
     return false;
   }
   return true;
@@ -340,7 +340,7 @@ function showFeedback(message, type) {
 /* === LOGOUT === */
 function logoutNow() {
   localStorage.clear();
-  window.location.href = '/login.html';
+  window.location.href = '/';
 }
 
 function setupLogout() {
