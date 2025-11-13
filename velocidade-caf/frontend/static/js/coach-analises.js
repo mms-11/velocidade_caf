@@ -17,7 +17,7 @@ function checkAuth() {
   }
   
   if (userRole !== 'treinador') {
-    window.location.href = '/atleta-dash.html';
+    window.location.href = '/athlete-analises.html';
     return false;
   }
   

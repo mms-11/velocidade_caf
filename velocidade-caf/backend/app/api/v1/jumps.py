@@ -26,8 +26,8 @@ def create_jump(
             detail="Perfil de atleta não encontrado"
         )
     
-    # Força o athlete_id do usuário autenticado
-    jump_in.athlete_id = athlete.id
+    # Força o athlete_id com o USER_ID (não o profile ID)
+    jump_in.athlete_id = current_user.id
     
     jump = crud_jump.create_jump(db, jump_in)
     return jump
@@ -48,7 +48,8 @@ def get_my_jumps(
             detail="Perfil de atleta não encontrado"
         )
     
-    jumps = crud_jump.get_jumps_by_athlete(db, athlete.id, skip=skip, limit=limit)
+    # Usa USER_ID, não profile ID
+    jumps = crud_jump.get_jumps_by_athlete(db, current_user.id, skip=skip, limit=limit)
     return jumps
 
 
@@ -65,7 +66,8 @@ def get_my_jump_statistics(
             detail="Perfil de atleta não encontrado"
         )
     
-    stats = crud_jump.get_jump_statistics(db, athlete.id)
+    # Usa USER_ID, não profile ID
+    stats = crud_jump.get_jump_statistics(db, current_user.id)
     return stats
 
 
@@ -82,7 +84,8 @@ def get_my_best_jump(
             detail="Perfil de atleta não encontrado"
         )
     
-    best_jump = crud_jump.get_best_jump(db, athlete.id)
+    # Usa USER_ID, não profile ID
+    best_jump = crud_jump.get_best_jump(db, current_user.id)
     if not best_jump:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -159,9 +162,9 @@ def update_jump(
             detail="Salto não encontrado"
         )
     
-    # Verifica se o salto pertence ao atleta
+    # Verifica se o salto pertence ao usuário (não ao perfil)
     athlete = crud_athlete.get_athlete_by_user_id(db, current_user.id)
-    if not athlete or jump.athlete_id != athlete.id:
+    if not athlete or jump.athlete_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Sem permissão para editar este salto"
@@ -185,9 +188,9 @@ def delete_jump(
             detail="Salto não encontrado"
         )
     
-    # Verifica se o salto pertence ao atleta
+    # Verifica se o salto pertence ao usuário (não ao perfil)
     athlete = crud_athlete.get_athlete_by_user_id(db, current_user.id)
-    if not athlete or jump.athlete_id != athlete.id:
+    if not athlete or jump.athlete_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Sem permissão para deletar este salto"

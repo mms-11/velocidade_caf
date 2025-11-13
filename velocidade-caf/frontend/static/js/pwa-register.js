@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
 async function registerServiceWorker() {
   try {
     const registration = await navigator.serviceWorker.register('/static/sw.js', {
-      scope: '/'
+      scope: '/static/'
     });
     
     console.log('✅ Service Worker registrado com sucesso!');
